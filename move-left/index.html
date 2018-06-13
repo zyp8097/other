@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	</head>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		
+		ul {
+			display: flex;
+			justify-content: space-around;
+			height: 40px;
+			align-items: center;
+			position: relative;
+		}
+		
+		li.act {
+			color: pink;
+		}
+		
+		.xian {
+			position: absolute;
+			height: 2px;
+			width: 56px;
+			background-color: pink;
+			bottom: 0;
+			left: 0;
+			z-index: 1;
+			-webkit-transition: -webkit-transform .3s cubic-bezier(.645, .045, .355, 1);
+			transition: -webkit-transform .3s cubic-bezier(.645, .045, .355, 1);
+			transition: transform .3s cubic-bezier(.645, .045, .355, 1);
+			transition: transform .3s cubic-bezier(.645, .045, .355, 1), -webkit-transform .3s cubic-bezier(.645, .045, .355, 1);
+		}
+	</style>
+
+	<body>
+		<ul>
+			<map class="xian"></map>
+			<li>成人</li>
+			<li>少儿</li>
+			<li>男人</li>
+			<li>女人</li>
+			<li>老人</li>
+		</ul>
+	</body>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script>
+		
+		$('ul li:first-of-type').addClass('act')
+		move()
+		function move() {
+			var liAct = parseInt($('li.act').get(0).offsetWidth) + 10
+			var left = $('li.act').offset().left - 5
+			console.log(left)
+			console.log(liAct)
+			$('.xian').css({
+				'width': liAct + 'px',
+				'transform': 'translateX(' + left + 'px)'
+			})
+		}
+		
+		$('li').on('click',function() {
+			var that = this;
+			$(that).siblings().removeClass('act')
+			$(that).addClass('act')
+			move()
+		})
+	</script>
+
+</html>
